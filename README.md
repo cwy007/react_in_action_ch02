@@ -8,6 +8,10 @@ browser-sync start --server --browser "Google Chrome" --files "stylesheets/*.css
 
 ```
 
+## React应用的主要“成分”的概览
+
+![React应用的主要“成分”的概览](https://tva1.sinaimg.cn/large/007S8ZIlly1ggnemjywnlj30by0hsdiq.jpg)
+
 ## ReactDOM.render 的函数签名
 
 ```jsx
@@ -85,3 +89,51 @@ React会为React类的实例（不是蓝图本身）创建并追踪一个特殊�
 React元素是DOM的镜像而组件是将它们组织在一起的方法
 
 支撑实例是一种为特定组件提供数据存储和访问的方法
+
+* React的工作方式的整体情况
+
+![React的工作方式的整体情况](https://tva1.sinaimg.cn/large/007S8ZIlly1ggoa43irykj30m808777a.jpg)
+
+React使用React类和React元素创建内存中控制实际DOM的虚拟DOM。
+
+它还创建了一个“综合”事件系统，以便仍可以对来自浏览器的事件做出反应（如点击、滚动和其他用户引起的事件）
+
+* 状态是什么？
+
+从另一个方面来看，状态是某个特定时间事物的信息。例如，通过询问“你今天怎么样？”来了解朋友的“状态”。
+
+```jsx
+this.state // 可变状态
+this.props // 不可变状态
+```
+
+* 应该在什么时候使用状态？
+
+在想要改变存储在组件中的数据时使用。
+
+在React中，需要变化的数据常常来自于用户输入（通常是文本、文件、切换选项等）或者是用户输入的结果，但也可能是许多其他东西。
+
+* this.setState
+
+```jsx
+// this.setState接收一个用来更新状态的更新器函数，而且this.setState不返回任何东西
+setState(
+  function(prevState, props) -> nextState,
+  callback
+) -> void
+```
+
+不能像在非React情况下那样直接覆盖this.state，因为React需要追踪状态并确保虚拟DOM和实际DOM保持同步。
+
+* 什么会引起React进行更新？
+
+React实现了一个合成事件系统作为虚拟DOM的一部分，它会将浏览器中的事件转换为React应用的事件。
+
+React要确保DOM与虚拟DOM保持一致，如果虚拟DOM没有更新，就不会让DOM发生变化。
+
+* 用单向数据流创建新组件
+
+![用单向数据流创建新组件](https://tva1.sinaimg.cn/large/007S8ZIlly1ggobw0feylj30hs09amyb.jpg)
+
+要添加帖子，需要从输入字段获取数据并以某种方式传给父组件，然后更新后的数据将被用来渲染帖子
+
