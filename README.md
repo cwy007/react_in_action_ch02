@@ -65,3 +65,13 @@ const root = React.createElement('div', {},
 DOMElement
 
 ![DOMElement](https://tva1.sinaimg.cn/large/007S8ZIlly1ggo3r4uebfj30hs06xjsn.jpg)
+
+* React 元素
+
+```html
+React元素接收一个字符串来创建一种DOM元素（div、a、p等）。
+可以通过props对象为React元素提供配置。这类似于DOM元素的属性（如<img src="aUrl"/>）。
+React元素是可嵌套的，可以将其他React元素作为某个元素的子元素。
+React使用React元素创建虚拟DOM。当React更新浏览器DOM时，React DOM会使用虚拟DOM。
+React元素是React中构成组件的东西。
+```
