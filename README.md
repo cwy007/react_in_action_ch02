@@ -75,3 +75,13 @@ React元素是可嵌套的，可以将其他React元素作为某个元素的子�
 React使用React元素创建虚拟DOM。当React更新浏览器DOM时，React DOM会使用虚拟DOM。
 React元素是React中构成组件的东西。
 ```
+
+* React类有支撑实例而React元素没有
+
+![React类有支撑实例而React元素没有](https://tva1.sinaimg.cn/large/007S8ZIlly1ggo96c7iacj30hs0ab40w.jpg)
+
+React会为React类的实例（不是蓝图本身）创建并追踪一个特殊的数据对象
+
+React元素是DOM的镜像而组件是将它们组织在一起的方法
+
+支撑实例是一种为特定组件提供数据存储和访问的方法
