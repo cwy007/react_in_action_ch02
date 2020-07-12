@@ -3,6 +3,8 @@
 《React实战》ch02
 
 ```bash
+npm install -g browser-sync
+
 # 实时更新页面
 browser-sync start --server --browser "Google Chrome" --files "stylesheets/*.css, *.html, *.js"
 
@@ -136,3 +138,21 @@ React要确保DOM与虚拟DOM保持一致，如果虚拟DOM没有更新，就不
 ![用单向数据流创建新组件](https://tva1.sinaimg.cn/large/007S8ZIlly1ggobw0feylj30hs09amyb.jpg)
 
 要添加帖子，需要从输入字段获取数据并以某种方式传给父组件，然后更新后的数据将被用来渲染帖子
+
+* JSX是什么？
+
+它是对ECMAScript的一种类XML的语法扩展，但它没有定义任何语义，其专门提供给预处理器使用。
+
+JSX是JavaScript的扩展，其类似XML并且仅用于代码转换工具。
+
+* 声明周期方法
+
+React会在渲染和更新过程中按一定顺序调用它们。
+
+* 组件间通信
+
+```html
+React组件通过属性进行通信并具有父子关系。
+父组件能够传递数据给子组件，但子组件不能修改父组件。
+它们可以通过回调函数将数据传递给父组件，但不能直接访问父组件。
+```
