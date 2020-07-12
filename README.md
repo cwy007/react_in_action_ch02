@@ -136,4 +136,3 @@ React要确保DOM与虚拟DOM保持一致，如果虚拟DOM没有更新，就不
 ![用单向数据流创建新组件](https://tva1.sinaimg.cn/large/007S8ZIlly1ggobw0feylj30hs09amyb.jpg)
 
 要添加帖子，需要从输入字段获取数据并以某种方式传给父组件，然后更新后的数据将被用来渲染帖子
-

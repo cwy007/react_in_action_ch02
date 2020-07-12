@@ -9,6 +9,41 @@ const root = React.createElement('div', {},
   )
 );
 
+const data = {
+  post: {
+    id: 123,
+    content: 'What we hope ever to do with ease, we must first learn to do with diligence. -- Samuel Johnson',
+    user: 'Mark Thomas',
+  },
+  comments: [
+    {
+      id: 0,
+      user: 'David',
+      content: 'such. win.',
+    },
+    {
+      id: 1,
+      user: 'Haley',
+      content: 'Love it.',
+    },
+    {
+      id: 2,
+      user: 'Peter',
+      content: 'Who was Samuel Johnson?',
+    },
+    {
+      id: 3,
+      user: 'Mitchell',
+      content: '@peter get off Letters and do your homework',
+    },
+    {
+      id: 4,
+      user: 'Peter',
+      content: '@mitchell ok :P',
+    },
+  ],
+};
+
 class Post extends React.Component {
   render() {
     return React.createElement(
@@ -54,7 +89,7 @@ class Comment extends React.Component {
         {
           className: 'commentAuthor'
         },
-        this.props.user,
+        this.props.user + ' ',
         React.createElement(
           'span',
           {
@@ -103,6 +138,10 @@ class CreateComment extends React.Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    this.props.onCommentSubmit({
+      user: this.state.user.trim(),
+      content: this.state.content.trim()
+    });
     this.setState(() => ({
       user: '',
       content: ''
@@ -141,17 +180,72 @@ CreateComment.propTypes = {
   content: PropTypes.string
 };
 
-const App = React.createElement(Post, {
-    id: 1,
-    content: 'said: This is a post!',
-    user: 'mark'
-  },
-  React.createElement(Comment, {
-    id: 2,
-    user: 'bob',
-    content: 'commented: wow! how cool!'
-  }),
-  React.createElement(CreateComment)
-);
+class CommentBox extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      comments: this.props.comments
+    };
+    this.handleCommentSubmit = this.handleCommentSubmit.bind(this);
+  }
+
+  handleCommentSubmit(comment) {
+    const comments = this.state.comments;
+
+    comment.id = Date.now();
+    const newComments = comments.concat([comment]);
+    this.setState({
+      comments: newComments
+    })
+  }
+
+  render() {
+    return React.createElement(
+      'div',
+      {
+        className: 'commentBox'
+      },
+      React.createElement(Post, {
+        id: this.props.post.id,
+        content: this.props.post.content,
+        user: this.props.post.user
+      }),
+      this.state.comments.map(function(comment) {
+        return React.createElement(Comment, {
+          key: comment.id,
+          id: comment.id,
+          content: comment.content,
+          user: comment.user
+        });
+      }),
+      React.createElement(CreateComment, {
+        onCommentSubmit: this.handleCommentSubmit
+      })
+    );
+  }
+}
+
+CommentBox.propTypes = {
+  post: PropTypes.object,
+  comments: PropTypes.arrayOf(PropTypes.object)
+};
+
+const App = React.createElement(CommentBox, {
+  post: data.post,
+  comments: data.comments
+});
+
+// const App = React.createElement(Post, {
+//     id: 1,
+//     content: 'said: This is a post!',
+//     user: 'mark'
+//   },
+//   React.createElement(Comment, {
+//     id: 2,
+//     user: 'bob',
+//     content: 'commented: wow! how cool!'
+//   }),
+//   React.createElement(CreateComment)
+// );
 
 ReactDOM.render(App, node);
